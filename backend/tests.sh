@@ -8,4 +8,4 @@
 
 ### POST ###
 
-curl -d '{ "title": "Rick here", "content": "I am Rick" }' -H 'Content-Type: application/json' -v http://localhost:2242/api/content
+curl -d '{ "title": "", "content": [ {"paragraph": "", "image": ""} ] }' -H 'Content-Type: application/json' -v http://localhost:2242/api/content
