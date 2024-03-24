@@ -2,9 +2,16 @@ import fastify from "fastify";
 import postgres from "postgres";
 import { sql } from "./lib/sql.ts";
 
-interface ContentSchema {
+interface PresentationSchema {
+  id: int;
   title: string;
-  content: string;
+  createdAt: string;
+}
+
+interface SectionStruct {
+  content_id: number;
+  paragraph: string;
+  image: string;
 }
 
 const app = fastify();
@@ -14,24 +21,59 @@ app.get("/", (request, reply) => {
 });
 
 app.get("/api/show_all", async (request, reply) => {
-  const result = await sql`SELECT title FROM school_presentations`;
+  const allPresentations = await sql`SELECT * FROM presentations`;
 
-  reply.status(200).send(result);
+  let currentPresentationContent;
+
+  if (!allPresentations[0]) {
+    return reply.status(404).send("Not found");
+  }
+
+  const allPresentationsContent = allPresentations.map(
+    async (presentationInfos: PresentationSchema) => {
+      currentPresentationContent =
+        await sql`SELECT * FROM sections WHERE content_id = ${presentationInfos.id}`;
+
+      const sections: Array<string, string> = currentPresentationContent.map(
+        (section) => {
+          return [section.paragraph_text, section.image_url];
+        },
+      );
+
+      return { presentationInfos, sections };
+    },
+  );
+
+  return reply.status(200).send(await Promise.all(allPresentationsContent));
 });
 
 app.post("/api/content", async (request, reply) => {
-  const { title, content } = request.body as ContentSchema;
+  const { title, content } = request.body as presentationschema;
 
-  if (!title || !content) reply.status(500).send("Invalid request body");
+  if (!title[0] || !content[0])
+    return reply.status(500).send("Invalid request body");
 
   try {
-    const result = await sql`INSERT INTO school_presentations (title, content) 
-    VALUES (${title}, ${content})
+    const result = await sql`INSERT INTO presentations (title) 
+    VALUES (${title})
 
     RETURNING *
   `;
 
-    reply.status(201).send(result[0]);
+    const presentationId =
+      await sql`SELECT id FROM presentations WHERE title = ${result[0].title}`;
+
+    const contents: Array<SectionStruct> = content.map((obj) => {
+      return {
+        content_id: presentationId[0].id,
+        paragraph_text: obj.paragraph,
+        image_url: obj.image,
+      };
+    });
+
+    await sql`INSERT INTO sections ${sql(contents, "content_id", "paragraph_text", "image_url")}`;
+
+    reply.status(201).send("Presentation created!");
   } catch (err) {
     if (err instanceof postgres.PostgresError) {
       if (err.code === "23505")
