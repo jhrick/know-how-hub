@@ -70,7 +70,7 @@ app.post("/api/content", async (request, reply) => {
     const contents: Array<SectionStruct> = content.map((obj) => {
       return {
         content_id: presentationId[0].id,
-        presenter: obj?.presenter,
+        presenter: obj.presenter || "anyone",
         paragraph_text: obj.paragraph,
         image_url: obj.image,
       };
