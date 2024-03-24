@@ -2,16 +2,18 @@ import fastify from "fastify";
 import postgres from "postgres";
 import { sql } from "./lib/sql.ts";
 
-interface PresentationSchema {
-  id: int;
-  title: string;
-  createdAt: string;
-}
-
 interface SectionStruct {
   content_id: number;
+  presenter?: string;
   paragraph: string;
   image: string;
+}
+
+interface RequestBodySchema {
+  id: int;
+  title: string;
+  content: Array<SectionStruct>;
+  createdAt: string;
 }
 
 const app = fastify();
@@ -36,7 +38,9 @@ app.get("/api/show_all", async (request, reply) => {
 
       const sections: Array<string, string> = currentPresentationContent.map(
         (section) => {
-          return [section.paragraph_text, section.image_url];
+          const { presenter, paragraph_text, image_url } = section;
+
+          return { presenter, paragraph_text, image_url };
         },
       );
 
@@ -66,12 +70,13 @@ app.post("/api/content", async (request, reply) => {
     const contents: Array<SectionStruct> = content.map((obj) => {
       return {
         content_id: presentationId[0].id,
+        presenter: obj?.presenter,
         paragraph_text: obj.paragraph,
         image_url: obj.image,
       };
     });
 
-    await sql`INSERT INTO sections ${sql(contents, "content_id", "paragraph_text", "image_url")}`;
+    await sql`INSERT INTO sections ${sql(contents)}`;
 
     reply.status(201).send("Presentation created!");
   } catch (err) {

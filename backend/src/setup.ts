@@ -10,6 +10,7 @@ async function setup() {
   await sql`CREATE TABLE IF NOT EXISTS sections (
     id SERIAL PRIMARY KEY,
     content_id INT REFERENCES presentations(id),
+    presenter TEXT DEFAULT 'anyone',
     paragraph_text TEXT,
     image_url VARCHAR(255)
   )`;
