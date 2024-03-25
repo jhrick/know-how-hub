@@ -1,4 +1,5 @@
 import fastify, { FastifyRequest } from "fastify";
+import cors, { OriginFunction } from "@fastify/cors";
 import postgres from "postgres";
 import { sql } from "./lib/sql";
 import { getPresentationFromTitle } from "./usecases/GetPresentationFromTitle";
@@ -26,6 +27,19 @@ type Params = FastifyRequest<{ Params: IAppParams }>;
 type RequestBody = FastifyRequest<{ Body: IPresentationSchema }>;
 
 const app = fastify();
+
+app.register(cors, {
+  origin: (origin, cb) => {
+    const hostname = new URL(origin!).hostname;
+
+    if (hostname === "localhost") {
+      cb(null, true);
+      return;
+    }
+
+    cb(new Error("Now allowed"), false);
+  },
+});
 
 app.get("/", (request, reply) => {
   reply.code(200).send("oi, tu tá na rota raiz");
