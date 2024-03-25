@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import { sql } from "../lib/sql";
 
 interface IPresentation {
@@ -20,14 +19,13 @@ export async function getPresentationFromTitle(title: string) {
 
   const searchResult: IPresentation = search[0] as IPresentation;
 
-  if (!searchResult) throw new Error("Not Found, nada encontrado");
+  if (!searchResult) throw new Error("Not Found");
 
   const presentation = async (result: IPresentation) => {
     const presentationContent =
       await sql`SELECT * FROM sections WHERE content_id = ${result.id}`;
 
-    let sections: ISection[];
-    sections = presentationContent.map((section) => {
+    let sections: ISection[] = presentationContent.map((section) => {
       const { presenter, paragraph_text, image_url } = section;
 
       return { presenter, paragraph_text, image_url };
