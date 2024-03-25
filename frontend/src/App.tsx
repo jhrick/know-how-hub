@@ -1,12 +1,9 @@
 import React from "react";
-import PresentationView from "./components/presentation-view";
+
+import AppRoutes from "./routes";
 
 const App = () => {
-  return (
-    <div>
-      <PresentationView />
-    </div>
-  );
+  return <AppRoutes></AppRoutes>;
 };
 
 export default App;
