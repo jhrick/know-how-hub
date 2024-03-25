@@ -1,0 +1,66 @@
+body {
+  background: #f1f1f1;
+}
+
+ul > li {
+  list-style: none;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.content > header {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.content > main > h2 {
+  padding-bottom: 0.4rem;
+  text-align: center;
+}
+
+.content > main > ul {
+  max-height: 70%;
+  padding: 0;
+}
+
+.content > main > ul > li {
+  background: #fdfdfd;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.35rem 1rem 0 rgba(0, 0, 0, 0.2);
+  height: 20rem;
+  margin: 2rem 0;
+  overflow: hidden;
+  width: 50rem;
+}
+
+.content > main > ul > li > img {
+  height: 50%;
+  object-fit: cover;
+  object-position: 100% 30%;
+  width: 100%;
+}
+
+.content > main > ul > li > h3,
+p {
+  margin: 2rem;
+}
+
+.content > main > ul > li > h3 > span {
+  background-color: #efefef;
+  border-radius: 1rem;
+  padding: 0.3rem 0.75rem;
+}
+
+.content > main > ul > li > p {
+  font-size: 0.75rem;
+}
+
+.content > main > ul > li > p > span {
+  background-color: #efefef;
+  border-radius: 1rem;
+  padding: 0.3rem 0.75rem;
+}

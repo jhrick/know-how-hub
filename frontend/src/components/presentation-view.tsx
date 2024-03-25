@@ -32,27 +32,24 @@ const PresentationView = () => {
       });
   }, []);
 
-  const listPosts = (
-    <ul>
-      {posts.map((post) => {
-        return (
-          <li>
-            <h3>{post.presentationInfos.title}</h3>
-            <p>{post.sections.map((section) => section.paragraph_text)}</p>
-            {post.sections.map((section) => {
-              return <img alt={section.image_url} />;
-            })}
-            ;
-          </li>
-        );
+  const listPosts = posts.map((post) => (
+    <li key={post.presentationInfos.id}>
+      {post.sections.map((section) => {
+        return <img src={section.image_url} alt={section.image_url} />;
       })}
-    </ul>
-  );
+      <h3>
+        <span>{post.presentationInfos.title}</span>
+      </h3>
+      <p>
+        <span>{post.sections.map((section) => section.paragraph_text)}</span>
+      </p>
+    </li>
+  ));
 
   return (
     <>
-      <h1>PresentationView</h1>
-      {listPosts}
+      <h2>All Presentations:</h2>
+      <ul>{listPosts}</ul>
     </>
   );
 };
