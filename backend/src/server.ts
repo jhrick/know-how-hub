@@ -29,16 +29,8 @@ type RequestBody = FastifyRequest<{ Body: IPresentationSchema }>;
 const app = fastify();
 
 app.register(cors, {
-  origin: (origin, cb) => {
-    const hostname = new URL(origin!).hostname;
-
-    if (hostname === "localhost") {
-      cb(null, true);
-      return;
-    }
-
-    cb(new Error("Now allowed"), false);
-  },
+  credentials: true,
+  origin: /localhost\:3000/,
 });
 
 app.get("/", (request, reply) => {
