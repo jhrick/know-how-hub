@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import postgres from "postgres";
-import { sql } from "./lib/sql.ts";
+import { sql } from "./lib/sql";
+import { getPresentationFromTitle } from "./usecases/GetPresentationFromTitle";
 
 interface SectionStruct {
   content_id: number;
@@ -20,6 +21,18 @@ const app = fastify();
 
 app.get("/", (request, reply) => {
   reply.code(200).send("oi, tu tá na rota raiz");
+});
+
+app.get("/:title", async (request, reply) => {
+  const title = request.params;
+
+  try {
+    const presentation = await getPresentationFromTitle(title.title);
+
+    return reply.status(200).send(presentation);
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 app.get("/api/show_all", async (request, reply) => {
