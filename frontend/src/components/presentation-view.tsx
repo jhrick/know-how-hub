@@ -34,14 +34,19 @@ const PresentationView = () => {
 
   const listPosts = posts.map((post) => (
     <li key={post.presentationInfos.id}>
-      {post.sections.map((section) => {
-        return <img src={section.image_url} alt={section.image_url} />;
+      {post.sections.map((section, i) => {
+        if (i === 0)
+          return <img src={section.image_url} alt={section.image_url} />;
       })}
       <h3>
         <span>{post.presentationInfos.title}</span>
       </h3>
       <p>
-        <span>{post.sections.map((section) => section.paragraph_text)}</span>
+        <span>
+          {post.sections.map((section, i) => {
+            if (i === 0) return section.paragraph_text;
+          })}
+        </span>
       </p>
     </li>
   ));
