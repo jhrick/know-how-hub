@@ -6,10 +6,16 @@ ul > li {
   list-style: none;
 }
 
+a {
+  color: #000;
+  text-decoration: none;
+}
+
 .content {
   align-items: center;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .content > header {
@@ -17,7 +23,15 @@ ul > li {
   text-align: center;
 }
 
+#create-presentation-btn {
+  height: 2rem;
+  position: absolute;
+  right: 2rem;
+  top: 3rem;
+}
+
 .content > main > h2 {
+  margin: 0;
   padding-bottom: 0.4rem;
   text-align: center;
 }

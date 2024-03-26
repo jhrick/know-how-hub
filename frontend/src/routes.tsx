@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Home from "./pages/InitialPage";
+import CreatePresentation from "./pages/CreatePresentation";
 
 const AppRoutes = () => {
   return (
@@ -8,6 +9,10 @@ const AppRoutes = () => {
       <BrowserRouter>
         <Routes>
           <Route Component={Home} path="/"></Route>
+          <Route
+            Component={CreatePresentation}
+            path="/create-presentation"
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
