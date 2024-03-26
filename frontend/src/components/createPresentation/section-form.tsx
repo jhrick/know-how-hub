@@ -2,24 +2,38 @@ import { ChangeEventHandler } from "react";
 
 interface ISectionProps {
   sectionNum: number;
-  handleInputChange: ChangeEventHandler<HTMLElement>;
+  handleInputChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const SectionForm = ({ sectionNum, handleInputChange }: ISectionProps) => {
+  const sectionClassName = "section_" + sectionNum.toString();
+
   return (
     <div>
       <h4>Section {sectionNum}</h4>
       <label htmlFor="paragraph">Text</label>
       <br />
-      <input name="paragraph" onChange={handleInputChange} />
+      <input
+        className={sectionClassName}
+        name="paragraph"
+        onChange={handleInputChange}
+      />
       <br />
       <label htmlFor="presenter">Presenter</label>
       <br />
-      <input name="presenter" onChange={handleInputChange} />
+      <input
+        className={sectionClassName}
+        name="presenter"
+        onChange={handleInputChange}
+      />
       <br />
       <label htmlFor="image">Image</label>
       <br />
-      <input name="image" onChange={handleInputChange} />
+      <input
+        className={sectionClassName}
+        name="image"
+        onChange={handleInputChange}
+      />
       <br />
     </div>
   );
@@ -27,7 +41,7 @@ const SectionForm = ({ sectionNum, handleInputChange }: ISectionProps) => {
 
 const renderSectionForm = (
   sectionQtd: number,
-  handleInputChange: ChangeEventHandler<HTMLElement>,
+  handleInputChange: ChangeEventHandler<HTMLInputElement>,
 ) => {
   return (
     <div>
