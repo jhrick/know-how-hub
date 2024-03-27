@@ -67,11 +67,18 @@ a {
   height: 20rem;
   margin: 2rem 0;
   overflow: hidden;
+  position: relative;
   width: 50rem;
 }
 
 li:hover {
   cursor: pointer;
+}
+
+.text .create-at {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 }
 
 .content > main > ul > li > img {
@@ -95,6 +102,24 @@ h3 > span {
   border-radius: 1rem;
   display: block;
   line-height: 1.5rem;
+  max-width: 18rem;
   padding: 0.2rem 0.75rem;
   width: max-content;
+}
+
+.delete-presentation_btn {
+  background: #ff0000;
+  border: none;
+  border-radius: 0.5rem;
+  bottom: 1rem;
+  color: #fff;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.delete-presentation_btn:hover {
+  background: #e50000;
+  cursor: pointer;
 }

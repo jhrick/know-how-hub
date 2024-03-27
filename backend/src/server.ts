@@ -1,4 +1,4 @@
-import fastify, { FastifyRequest } from "fastify";
+import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors, { OriginFunction } from "@fastify/cors";
 import postgres from "postgres";
 import { sql } from "./lib/sql";
@@ -19,6 +19,7 @@ interface IPresentationSchema {
 }
 
 interface IAppParams {
+  id: number;
   title: string;
 }
 
@@ -57,7 +58,7 @@ app.get("/api/show_all", async (request, reply) => {
   let currentPresentationContent;
 
   if (!allPresentations[0]) {
-    return reply.status(404).send("Not found");
+    return reply.status(201).send([]);
   }
 
   const allPresentationsContent = await Promise.all(
@@ -116,6 +117,24 @@ app.post("/api/content", async (request: RequestBody, reply) => {
 
     return reply.status(500).send({ message: "Internal error" });
   }
+});
+
+app.delete("/api/delete/:id", async (request: Params, reply: FastifyReply) => {
+  const presentationId = request.params.id;
+
+  if (!presentationId) return reply.status(400).send("Bad request");
+
+  try {
+    // delete relational table first
+    await sql`DELETE FROM sections WHERE content_id = ${presentationId}`;
+
+    await sql`DELETE FROM presentations WHERE id = ${presentationId}`;
+  } catch (err) {
+    console.log(err);
+    return reply.status(500).send({ message: "Internal error" });
+  }
+
+  console.log(presentationId);
 });
 
 app.listen({
