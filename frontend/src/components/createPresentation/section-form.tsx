@@ -44,7 +44,7 @@ const renderSectionForm = (
   handleInputChange: ChangeEventHandler<HTMLInputElement>,
 ) => {
   return (
-    <div>
+    <div id="sections-form">
       {[...Array(sectionQtd)].map((_, index) => (
         <SectionForm
           sectionNum={index + 1}

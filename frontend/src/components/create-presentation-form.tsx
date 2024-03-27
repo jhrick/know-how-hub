@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { renderSectionForm } from "../components/createPresentation/section-form";
 import { useState, ChangeEvent, FormEvent } from "react";
 
@@ -65,18 +66,24 @@ const CreatePresentationForm = () => {
     <>
       <div id="presentation-creation">
         <div className="creation-form_container">
+          <button id="exit-form">
+            <Link to="/">x</Link>
+          </button>
           <header>
             <div>
               <h2>Create Presention</h2>
             </div>
           </header>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <br />
-            <input name="title" onChange={handleInputTitleChange} />
+            <div id="title-input">
+              <label htmlFor="title">Title</label>
+              <br />
+              <input name="title" onChange={handleInputTitleChange} />
+            </div>
             <br />
             {renderSectionForm(sectionsQtd, handleInputContentChange)}
             <button
+              id="add-section-btn"
               type="button"
               onClick={() => {
                 sections.push({ presenter: "", paragraph: "", image: "" });
@@ -86,6 +93,7 @@ const CreatePresentationForm = () => {
               Add Section
             </button>
             <button
+              id="delete-section-btn"
               type="button"
               onClick={() => {
                 sections.pop();
@@ -94,7 +102,9 @@ const CreatePresentationForm = () => {
             >
               Remove Section
             </button>
-            <button type="submit">Create</button>
+            <button id="create-btn" type="submit">
+              Create
+            </button>
           </form>
         </div>
       </div>
