@@ -75,12 +75,6 @@ li:hover {
   cursor: pointer;
 }
 
-.text .create-at {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-}
-
 .content > main > ul > li > img {
   height: 100%;
   object-fit: cover;
@@ -88,8 +82,19 @@ li:hover {
   width: 100%;
 }
 
-.text {
-  margin: 2rem;
+li > .text {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  justify-content: space-between;
+  margin: 1rem 2rem;
+}
+
+.text > p,
+h3,
+button {
+  margin: 0.5rem 0;
 }
 
 .text > p {
@@ -101,7 +106,7 @@ h3 > span {
   background-color: #f5f5f5;
   border-radius: 1rem;
   display: block;
-  line-height: 1.5rem;
+  line-height: 1.25rem;
   max-width: 18rem;
   padding: 0.2rem 0.75rem;
   width: max-content;
@@ -111,11 +116,9 @@ h3 > span {
   background: #ff0000;
   border: none;
   border-radius: 0.5rem;
-  bottom: 1rem;
   color: #fff;
   font-weight: 800;
   padding: 0.25rem 0.75rem;
-  position: absolute;
   text-transform: uppercase;
 }
 

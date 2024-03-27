@@ -56,7 +56,11 @@ const PresentationView = () => {
           <span>{post.presentationInfos.created_at.substring(0, 10)}</span>
         </p>
         <h3>
-          <span>{post.presentationInfos.title}</span>
+          <span>
+            {post.presentationInfos.title.length > 22
+              ? post.presentationInfos.title.substring(0, 22) + "..."
+              : post.presentationInfos.title}
+          </span>
         </h3>
         <p>
           <span>

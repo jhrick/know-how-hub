@@ -1,3 +1,4 @@
+html,
 body {
   height: 100%;
   width: 100%;
@@ -19,7 +20,7 @@ input {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
 }
 
@@ -28,11 +29,11 @@ input {
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  height: 55vh;
+  height: 35rem;
   overflow: hidden;
   padding: 1rem;
   position: relative;
-  width: 30vw;
+  width: 30rem;
 }
 
 #exit-form {
