@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+import "./styles.css";
 
 interface IPresentationData {
   id: number;
@@ -45,14 +47,23 @@ const Presentation = () => {
   }, []);
 
   return (
-    <div>
+    <div className="presentation-container">
+      <button id="go-back-home">
+        <Link to="/">Go back</Link>
+      </button>
       <h1>{presentation?.result.title}</h1>
 
       {presentation?.sections.map((section, index) => {
         return (
-          <div key={index}>
-            <p>{section.paragraph_text}</p>
-            <img src={section.image_url} alt="this is " />
+          <div className="section" key={index}>
+            {section.image_url ? (
+              <img src={section.image_url} alt="working this" />
+            ) : (
+              ""
+            )}
+            <div className="text">
+              <p>{section.paragraph_text}</p>
+            </div>
           </div>
         );
       })}

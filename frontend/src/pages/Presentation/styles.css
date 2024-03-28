@@ -1,0 +1,54 @@
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  max-width: 80vw;
+  text-align: center;
+}
+
+img {
+  height: 80%;
+  width: 30rem;
+  object-fit: cover;
+}
+
+.presentation-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+#go-back-home {
+  border: none;
+  border-radius: 0.5rem;
+  left: 1rem;
+  padding: 0.3rem 1rem;
+  position: absolute;
+  top: 1rem;
+}
+
+.section {
+  align-items: center;
+  display: grid;
+  gap: 0 2rem;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  margin: 1rem;
+  width: 65vw;
+}
+
+.section > .text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.section > .text > p {
+  font-size: 0.9rem;
+  line-height: 2.5;
+}
