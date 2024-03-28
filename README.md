@@ -6,10 +6,9 @@ The main motivation behind the project's creation was my need to create school p
 
 ## How to run
 
-** What you need installed? **
-
-- Node.js
-- Docker Compose
+**What you need installed?**
+ - Node.js
+ - Docker Compose
 
 ##
 
@@ -31,5 +30,5 @@ $ yarn start
 
 ## Features:
 
-- [] add PUT method
-- [] add search bar
+ - [ ] add PUT method
+ - [ ] add search bar
