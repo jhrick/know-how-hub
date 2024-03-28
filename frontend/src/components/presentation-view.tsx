@@ -1,3 +1,4 @@
+import OpenPresentationBtn from "../components/open-presentation-btn";
 import DeletePresentationBtn from "../components/delete-presentation-btn";
 import { useState, useEffect } from "react";
 
@@ -29,6 +30,7 @@ const PresentationView = () => {
     fetchData().catch(console.error);
     console.log("valor mudou");
   }, []);
+
   const fetchData = async () => {
     const response = await fetch("http://localhost:2242/api/show_all");
 
@@ -51,7 +53,7 @@ const PresentationView = () => {
         .map((section) => {
           return <img src={section.image_url} alt={section.image_url} />;
         })}
-      <div className="text">
+      <div className="right-container">
         <p className="create-at">
           <span>{post.presentationInfos.created_at.substring(0, 10)}</span>
         </p>
@@ -73,10 +75,13 @@ const PresentationView = () => {
               )}
           </span>
         </p>
-        <DeletePresentationBtn
-          presentationId={post.presentationInfos.id}
-          onClick={() => deleteButtonHandle(post.presentationInfos.id)}
-        ></DeletePresentationBtn>
+        <div className="buttons">
+          <OpenPresentationBtn title={post.presentationInfos.title} />
+          <DeletePresentationBtn
+            presentationId={post.presentationInfos.id}
+            onClick={() => deleteButtonHandle(post.presentationInfos.id)}
+          ></DeletePresentationBtn>
+        </div>
       </div>
     </li>
   ));
